@@ -1,0 +1,28 @@
+import pygame
+import random
+class Obstacle(pygame.sprite.Sprite):
+    def __init__(self,x,y,width,height,btn_image):
+        super().__init__()
+        self.image = pygame.transform.scale(pygame.image.load(btn_image),(width,height))
+        self.rect = self.image.get_rect()
+        self.rect.x = x
+        self.rect.y = y
+        
+    def update(self):
+        self.rect.x -= 5  # зміщення спрайту вліво на швидкість руху перешкод
+
+    def spawn_obstacles():
+        obstacles = pygame.sprite.Group()
+         
+        gap_size = 100
+        screen_width = pygame.display.get_surface().get_width()
+        screen_height = pygame.display.get_surface().get_height()
+
+        top_height = random.randint(0, screen_height - gap_size)
+        bottom_height = screen_height - gap_size - top_height
+        
+        top_obstacle = Obstacle(screen_width, 0, 50, top_height)
+        bottom_obstacle = Obstacle(screen_width, top_height + gap_size, 50, bottom_height)
+        
+        obstacles.add(top_obstacle)
+        obstacles.add(bottom_obstacle)
