@@ -8,8 +8,16 @@ class Obstacle(pygame.sprite.Sprite):
         self.rect.x = x
         self.rect.y = y
         
+    def draw(self,win):
+    
+        win.blit(self.image, (self.rect.x,self.rect.y))
+
+        
     def update(self):
-        self.rect.x -= 5  # зміщення спрайту вліво на швидкість руху перешкод
+        self.rect.x -= 2  
+        if self.rect.x <=50:
+            self.rect.x = 700
+        
 
     def spawn_obstacles():
         obstacles = pygame.sprite.Group()

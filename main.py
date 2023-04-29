@@ -19,6 +19,8 @@ btn2 = Button(250,200,200,150,'EXITBTN.PNG.png')
 run = False
 bkgrnd = pygame.image.load(skyimg)
 bkgrnd_img = pygame.transform.scale(bkgrnd,(700,400))
+#def make_top_tower():
+
 
 
 player = Plane(200,200,70,35,planepng)
@@ -27,12 +29,27 @@ gap_size = 100
 screen_width = pygame.display.get_surface().get_width()
 screen_height = pygame.display.get_surface().get_height()
 
-top_height = random.randint(0, screen_height - gap_size)
-bottom_height = screen_height - gap_size - top_height
-        
-top_obstacle = Obstacle(screen_width, 0, 50, top_height,towerpng)
-bottom_obstacle = Obstacle(screen_width, top_height + gap_size, 50, bottom_height,towerpng) 
+top_height1 = random.randint(0, screen_height - gap_size)
+top_height2 = random.randint(0, screen_height - gap_size)
+top_height3 = random.randint(0, screen_height - gap_size)
+top_height4 = random.randint(0, screen_height - gap_size)
+bottom_height1 = screen_height - gap_size - top_height1
+bottom_height2 = screen_height - gap_size - top_height2
+bottom_height3 = screen_height - gap_size - top_height3
+bottom_height4 = screen_height - gap_size - top_height4     
+top_obstacle1 = Obstacle(screen_width, 0, 50, random.randint(0, screen_height - gap_size),towerpng)
+top_obstacle2 = Obstacle(screen_width+300, 0, 50, random.randint(0, screen_height - gap_size),towerpng)
+top_obstacle3 = Obstacle(screen_width+300, 0, 50, random.randint(0, screen_height - gap_size),towerpng)
+top_obstacle4 = Obstacle(screen_width+300, 0, 50, random.randint(0, screen_height - gap_size),towerpng)
+
+bottom_obstacle1  = Obstacle(screen_width, (screen_height - gap_size - top_height1) + gap_size, 50, bottom_height1,towerpng) 
+bottom_obstacle2 = Obstacle(screen_width+300, (screen_height - gap_size - top_height2) + gap_size, 50, bottom_height2,towerpng) 
+bottom_obstacle3 = Obstacle(screen_width+300, (screen_height - gap_size - top_height3) + gap_size, 50, bottom_height3,towerpng) 
+bottom_obstacle4 = Obstacle(screen_width+300, (screen_height - gap_size - top_height4) + gap_size, 50, bottom_height4,towerpng) 
   
+bot_obs_list = [bottom_obstacle1,bottom_obstacle2,bottom_obstacle3,bottom_obstacle4]
+top_obs_list = [top_obstacle1,top_obstacle2,top_obstacle3,top_obstacle4]
+
 
 while game:
     for e in pygame.event.get():
@@ -46,7 +63,7 @@ while game:
         
             
                 
-    if pygame.sprite.spritecollide(player, obstacles, False):
+    if player.rect.x and player.rect.y == bot_obs_list:
         run = False 
         
         
@@ -59,13 +76,12 @@ while game:
         player.update()
         
         
-        
-        
-        obstacles.add(top_obstacle)
-        obstacles.add(bottom_obstacle)     
-        obstacles.draw(win)
-        obstacles.update()
-            
+        for obs in bot_obs_list:
+            obs.draw(win)
+            obs.update()
+        for obss in top_obs_list:
+            obss.draw(win)
+            obss.update()   
         
         
         
