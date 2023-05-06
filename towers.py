@@ -11,13 +11,16 @@ class Obstacle(pygame.sprite.Sprite):
     def draw(self,win):
     
         win.blit(self.image, (self.rect.x,self.rect.y))
+        #win.blit(self.image, (self.rect.x,self.rect.y-400))
+
 
         
     def update(self):
         self.rect.x -= 2  
         if self.rect.x <=50:
             self.rect.x = 700
-        
+
+
 
     def spawn_obstacles():
         obstacles = pygame.sprite.Group()
