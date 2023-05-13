@@ -12,10 +12,12 @@ class Plane(pygame.sprite.Sprite):
 
     def update(self):
         self.vel_y += 1  
-        self.rect.y += self.vel_y  
+        self.rect.y += self.vel_y
+
     def restarts(self):
         self.rect.x = 200
         self.rect.y = 200
+        self.vel_y = 0
     def jump(self):
         self.vel_y = -10  
     def handle_events(self, event):

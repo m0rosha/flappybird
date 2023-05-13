@@ -85,16 +85,30 @@ while game:
              
             obss.draw(win)
             obss.update()   
-            
+        if player.rect.y >=400:
+            run=False   
+            player.restarts()
+            for mq in first_obs_list:
+                mq.rect.x = 700
+            for mq in sec_obs_list:
+                mq.rect.x = 700 + 250
         for el in first_obs_list:
 
             if player.rect.colliderect(el.rect):
-                run = False 
+                run = False
+                player.restarts() 
+                for mq in first_obs_list:
+                    mq.rect.x = 700
+                for mq in sec_obs_list:
+                    mq.rect.x = 700+250
         for el in sec_obs_list:
             if player.rect.colliderect(el.rect):
-                run = False    
-        
-        
+                run = False   
+                player.restarts() 
+                for mq in first_obs_list:
+                    mq.rect.x = 700
+                for mq in sec_obs_list:
+                    mq.rect.x = 700+250
        
          
 

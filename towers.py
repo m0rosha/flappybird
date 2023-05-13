@@ -19,6 +19,8 @@ class Obstacle(pygame.sprite.Sprite):
         self.rect.x -= 2  
         if self.rect.x <=50:
             self.rect.x = 700
+    def restart(self):
+        self.rect.x = 700
 
 
 
