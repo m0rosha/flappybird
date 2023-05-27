@@ -4,7 +4,7 @@ from buttons import Button
 from sprite import Plane
 from towers import Obstacle 
 win = pygame.display.set_mode((700,400))
-pygame.display.set_caption('Flappy bird 9/11')
+pygame.display.set_caption('Flappy plane ')
 game = True 
 fps = 60 
 score = 0
@@ -23,14 +23,14 @@ run = False
 bkgrnd = pygame.image.load(skyimg)
 bkgrnd_img = pygame.transform.scale(bkgrnd,(700,400))
 #def make_top_tower():
-
-
+pygame.mixer.init()
+udar = pygame.mixer.Sound('Udar.ogg')
+jump = pygame.mixer.Sound('jump.ogg')
 
 player = Plane(200,200,70,35,planepng)
 
 
-gap_sizes = range(100, 200, 150)  
-gap_size = random.choice(gap_sizes)
+gap_size = 200 
 
 obstacle_widths = range(40, 80, 10)  
 obstacle_heights = range(50, 200, 10)
@@ -62,6 +62,8 @@ while game:
         if e.type == pygame.KEYDOWN:
             if e.key == pygame.K_ESCAPE:
                 run = not run 
+            if e.key == pygame.K_SPACE:
+                jump.play()
         if run == True: 
             player.handle_events(e)
         
@@ -93,6 +95,7 @@ while game:
             score = 0
             player.restarts()
             text = font.render(f'score:{str(score)}',True,(255,100,0))
+            udar.play()
             for mq in first_obs_list:
                 mq.rect.x = 700
             for mq in sec_obs_list:
@@ -104,6 +107,7 @@ while game:
                 run = False
                 player.restarts() 
                 score == 0 
+                udar.play()
                 text = font.render(f'score:{str(score)}',True,(255,100,0))
                 for mq in first_obs_list:
                     mq.rect.x = 700
@@ -114,6 +118,7 @@ while game:
                 run = False   
                 score = 0  
                 player.restarts() 
+                udar.play()
                 text = font.render(f'score:{str(score)}',True,(255,100,0))
                 for mq in first_obs_list:
                     mq.rect.x = 700
