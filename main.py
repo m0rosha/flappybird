@@ -7,10 +7,13 @@ win = pygame.display.set_mode((700,400))
 pygame.display.set_caption('Flappy bird 9/11')
 game = True 
 fps = 60 
+score = 0
 towerpng = 'Tower.png'
 planepng = 'Airplane.png'
 skyimg = 'Sky.jpg'
-
+pygame.font.init()
+font = pygame.font.Font(None,32)
+text = font.render(f'score:{str(score)}',True,(255,100,0))
 clock = pygame.time.Clock()
 
 btn1 = Button(250,100,200,150,'pngwing.com.png')
@@ -26,7 +29,7 @@ bkgrnd_img = pygame.transform.scale(bkgrnd,(700,400))
 player = Plane(200,200,70,35,planepng)
 
 
-gap_sizes = range(100, 200, 10)  
+gap_sizes = range(100, 200, 150)  
 gap_size = random.choice(gap_sizes)
 
 obstacle_widths = range(40, 80, 10)  
@@ -71,7 +74,7 @@ while game:
     if run:
         
         win.blit(bkgrnd_img,(0,0))
-        
+        win.blit(text,(0,50))
         player.draw(win)
         
         player.update()
@@ -87,16 +90,21 @@ while game:
             obss.update()   
         if player.rect.y >=400:
             run=False   
+            score = 0
             player.restarts()
+            text = font.render(f'score:{str(score)}',True,(255,100,0))
             for mq in first_obs_list:
                 mq.rect.x = 700
             for mq in sec_obs_list:
                 mq.rect.x = 700 + 250
         for el in first_obs_list:
-
+            
             if player.rect.colliderect(el.rect):
+
                 run = False
                 player.restarts() 
+                score == 0 
+                text = font.render(f'score:{str(score)}',True,(255,100,0))
                 for mq in first_obs_list:
                     mq.rect.x = 700
                 for mq in sec_obs_list:
@@ -104,12 +112,21 @@ while game:
         for el in sec_obs_list:
             if player.rect.colliderect(el.rect):
                 run = False   
+                score = 0  
                 player.restarts() 
+                text = font.render(f'score:{str(score)}',True,(255,100,0))
                 for mq in first_obs_list:
                     mq.rect.x = 700
                 for mq in sec_obs_list:
                     mq.rect.x = 700+250
-       
+        if player.rect.x == top_obstacle.rect.x and player.rect.x != top_obstacle.rect.y:
+            score= score + 1
+            text = font.render(f'score:{str(score)}',True,(255,100,0))
+        if player.rect.x == top_obstacle1.rect.x and player.rect.x != top_obstacle1.rect.y:
+            score= score + 1
+            text = font.render(f'score:{str(score)}',True,(255,100,0))
+        
+
          
 
     else:
