@@ -10,18 +10,24 @@ fps = 60
 score = 0
 towerpng = 'Tower.png'
 planepng = 'Airplane.png'
-skyimg = 'Sky.jpg'
+skyimg = 'sky.jpg'
+menuimg = 'bkgrnd.jpg'
+bkgrnd1 = pygame.image.load(menuimg)
+bkgrnd_1_img = pygame.transform.scale(bkgrnd1,(700,400))
 pygame.font.init()
 font = pygame.font.Font(None,32)
 text = font.render(f'score:{str(score)}',True,(255,100,0))
 clock = pygame.time.Clock()
 
-btn1 = Button(250,100,200,150,'pngwing.com.png')
-btn2 = Button(250,200,200,150,'EXITBTN.PNG.png')
+btn1 = Button(280,100,100,50,'play.png')
+btn2 = Button(280,200,100,50,'exit.png')
 
 run = False
 bkgrnd = pygame.image.load(skyimg)
 bkgrnd_img = pygame.transform.scale(bkgrnd,(700,400))
+
+
+
 #def make_top_tower():
 pygame.mixer.init()
 udar = pygame.mixer.Sound('Udar.ogg')
@@ -135,7 +141,7 @@ while game:
          
 
     else:
-        
+        win.blit(bkgrnd_1_img,(0,0))
         if btn1.Draw(win):
             run = True
         if btn2.Draw(win):
