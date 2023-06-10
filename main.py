@@ -144,8 +144,10 @@ while game:
         win.blit(bkgrnd_1_img,(0,0))
         if btn1.Draw(win):
             run = True
+            score = 0
         if btn2.Draw(win):
             game = False
+            score = 0 
     
     pygame.display.update()
     clock.tick(fps)
